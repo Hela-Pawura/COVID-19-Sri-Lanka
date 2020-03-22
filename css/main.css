@@ -66,3 +66,17 @@ body{
   hr{
     border: 1px solid red;
   }
+  .hrfooter{
+    width: 80%;
+    border: 3px solid white;
+  }
+  .footer {
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+    height: auto;
+    width: 100%;
+    background: #000000;
+    text-align: center;
+    color: #8a8a8a;
+  }
