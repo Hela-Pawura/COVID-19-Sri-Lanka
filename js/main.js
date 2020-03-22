@@ -1,6 +1,4 @@
-$.get( "https://hpb.health.gov.lk/api/get-current-statistical", function( data ) {
-    console.log(data)
-  });
+
 
   
 function initMap() {
@@ -223,21 +221,36 @@ function initMap() {
       ]
     });
     var geocoder = new google.maps.Geocoder();
-    function geocodeAddress(geocoder, resultsMap) {
-        var address = "GH - KANDY"
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-    geocodeAddress(geocoder, map)
+    
+    $.get( "https://hpb.health.gov.lk/api/get-current-statistical", function( data ) {
+        console.log(data);
+        data["data"]["hospital_data"].forEach(e => {
+            //geocodeAddress(geocoder, map,e["hospital"]["name"])
+            temp1 = e["hospital"]["name"].replace(/ /g, "+");
+            
+            var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+ temp1 +"+,Sri+Lanka&key=AIzaSyD_1pLrdnWTqffEjdCLOYOzLmXT3csejUI";
+            //console.log(temp1)
+          /*$.get( geoURL, function( data ) {
+                console.log(this.temp1);
+               createMarker(data, infoWindow);
+            }(temp1));*/
+
+            (function (t1){
+              $.get( geoURL, (function( data ) {
+               createMarker(data, infoWindow, t1);
+            }));
+            }(temp1))
+            
+
+           
+            
+
+           
+           
+        })
+    });
+    
+    
   /*
     //initialize the geocoder
     var geocoder = new google.maps.Geocoder();
@@ -356,4 +369,34 @@ function initMap() {
       }
     });
   }
-  
+ 
+
+  //function to create a marker
+  function createMarker(data, infowindow, place){
+    place = place.replace(/\+/g," ")
+    var marker = new google.maps.Marker({
+        map: map,
+        position: data["results"][0]["geometry"]["location"],
+        icon: "./img/cross.png"
+      });
+
+      marker.addListener("click", function() {
+        //close other info windows
+        if (infowindow) {
+          infowindow.close();
+        }
+        if (map.zoom < 11) {
+          //zoom to marker
+          map.setZoom(11);
+          map.setCenter(marker.getPosition());
+        }
+        contentString =
+ `<h3>`+ place +`</h3>`;
+        infowindow = new google.maps.InfoWindow({
+          content: contentString,
+        });
+        infowindow.open(map, marker);
+
+      });
+      
+  }

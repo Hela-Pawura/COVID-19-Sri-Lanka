@@ -1,7 +1,8 @@
-body{background-color: black; color:#fff}
+body{background-color: black}
 #map {
-    height: 500px;
+    height: 90vh;
+    max-height:700px;
     max-width:600px;
     margin:auto;
-    
+
   }
