@@ -6,13 +6,32 @@
     <title>COVID-19-tracker</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     
 </head>
 <body>
     
+    <div class="covid-heading">COVID-19-LK</div>
+    <div class="covid-subhead">A Sri Lankan Coronavirus Tracker</div>
 
     <div id="map"></div>
 
+    <div>
+      <div class="category">TOTAL CASES</div>
+      <div class="number" id="local-cases">00</div>
+    </div>
+    <div>
+      <div class="category" style="color:#0f0">RECOVERED</div>
+      <div class="number" id="local-recovered">1</div>
+    </div>
+    <div>
+      <div class="category">DEATHS</div>
+      <div class="number" id="local-deaths">0</div>
+    </div>
+    <div>
+      <div class="category">IN OBSERVATION</div>
+      <div class="number" id="in-observ">222</div>
+    </div>
    
     <script
     src="https://code.jquery.com/jquery-3.4.1.js"

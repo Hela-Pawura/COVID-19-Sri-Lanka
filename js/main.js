@@ -224,6 +224,14 @@ function initMap() {
     
     $.get( "https://hpb.health.gov.lk/api/get-current-statistical", function( data ) {
         console.log(data);
+
+        //set the home page values
+        $("#local-cases").html(data["data"]["local_total_cases"])
+        $("#local-recovered").html(data["data"]["local_recovered"])
+        $("#local-deaths").html(data["data"]["local_deaths"])
+        $("#in-observ").html(data["data"]["local_total_number_of_individuals_in_hospitals"] - data["data"]["local_total_cases"])
+
+
         data["data"]["hospital_data"].forEach(e => {
             //geocodeAddress(geocoder, map,e["hospital"]["name"])
             temp1 = e["hospital"]["name"].replace(/ /g, "+");
