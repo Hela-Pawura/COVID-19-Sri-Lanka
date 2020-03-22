@@ -6,3 +6,9 @@ body{background-color: black}
     margin:auto;
 
   }
+  ul{
+    margin:0;
+  }
+  .place-head{
+    margin:0;
+  }

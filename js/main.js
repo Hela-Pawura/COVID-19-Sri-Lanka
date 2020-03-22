@@ -374,6 +374,7 @@ function initMap() {
   //function to create a marker
   function createMarker(data, infowindow, place){
     place = place.replace(/\+/g," ")
+  
     var marker = new google.maps.Marker({
         map: map,
         position: data["results"][0]["geometry"]["location"],
@@ -391,10 +392,18 @@ function initMap() {
           map.setCenter(marker.getPosition());
         }
         contentString =
- `<h3>`+ place +`</h3>`;
-        infowindow = new google.maps.InfoWindow({
+        `<h3 class="place-head">`+ place +`</h3>
+        
+        Currently Treating: <b>34</b> 
+          <ul type="circle">
+            <li>Local: <b>30</b> </li>
+            <li>Foreign: <b>4</b> </li>
+          
+        `;
+       /* infowindow = new google.maps.InfoWindow({
           content: contentString,
-        });
+        });*/
+        infowindow.setContent(contentString)
         infowindow.open(map, marker);
 
       });
