@@ -1,6 +1,3 @@
-
-
-  
 function initMap() {
     console.log("CALLED")
     infoWindow = new google.maps.InfoWindow();
@@ -12,6 +9,7 @@ function initMap() {
       zoomControl: true,
       streetViewControl: false,
       clickableIcons: false,
+      gestureHandling: 'cooperative',
       styles: [
         {
           "elementType": "geometry",
@@ -224,25 +222,24 @@ function initMap() {
     
     $.get( "https://hpb.health.gov.lk/api/get-current-statistical", function( data ) {
         console.log(data);
-
+        let updated = data["data"]["update_date_time"]
+        updated =updated.replace(" ", "<br>")
         //set the home page values
         $("#local-cases").html(data["data"]["local_total_cases"])
         $("#local-recovered").html(data["data"]["local_recovered"])
         $("#local-deaths").html(data["data"]["local_deaths"])
         $("#in-observ").html(data["data"]["local_total_number_of_individuals_in_hospitals"] - data["data"]["local_total_cases"])
-
+        
+        $("#new-cases").html(data["data"]["local_new_cases"]);
+        $("#new-deaths").html(data["data"]["local_new_deaths"]);
+        $("#global-total").html(data["data"]["global_total_cases"]);
+        $("#last-updated").html(updated);
 
         data["data"]["hospital_data"].forEach(e => {
-            //geocodeAddress(geocoder, map,e["hospital"]["name"])
             temp1 = e["hospital"]["name"].replace(/ /g, "+");
             
             var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+ temp1 +"+,Sri+Lanka&key=AIzaSyD_1pLrdnWTqffEjdCLOYOzLmXT3csejUI";
-            //console.log(temp1)
-          /*$.get( geoURL, function( data ) {
-                console.log(this.temp1);
-               createMarker(data, infoWindow);
-            }(temp1));*/
-
+   
             (function (t1, hospData){
               $.get( geoURL, (function( data ) {
                createMarker(data, infoWindow, t1, hospData);
@@ -294,9 +291,7 @@ function initMap() {
             <li>Foreign: <b>`+hospData["treatment_foreign"] +`</b> </li>
           
         `;
-       /* infowindow = new google.maps.InfoWindow({
-          content: contentString,
-        });*/
+      
         infowindow.setContent(contentString)
         infowindow.open(map, marker);
 
