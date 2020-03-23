@@ -238,7 +238,7 @@ function initMap() {
         data["data"]["hospital_data"].forEach(e => {
             temp1 = e["hospital"]["name"].replace(/ /g, "+");
             
-            var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+ temp1 +"+,Sri+Lanka&key=AIzaSyD_1pLrdnWTqffEjdCLOYOzLmXT3csejUI";
+            var geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+ temp1 +"+,Sri+Lanka&key=AIzaSyCBxMG1dMTPzM0XmSMApl-LMPhIQgmHV7U";
    
             (function (t1, hospData){
               $.get( geoURL, (function( data ) {
