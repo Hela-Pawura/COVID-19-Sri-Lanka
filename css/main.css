@@ -68,7 +68,7 @@ body{
   }
   .hrfooter{
     width: 80%;
-    border: 3px solid white;
+    border: 3px solid #919191;
   }
   .footer {
     position: relative;
@@ -79,4 +79,7 @@ body{
     background: #000000;
     text-align: center;
     color: #8a8a8a;
+  }
+  a{
+    color:#f00;
   }
