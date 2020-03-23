@@ -1,5 +1,4 @@
 function initMap() {
-    console.log("CALLED")
     infoWindow = new google.maps.InfoWindow();
   
     map = new google.maps.Map(document.getElementById("map"), {
@@ -221,7 +220,6 @@ function initMap() {
     var geocoder = new google.maps.Geocoder();
     
     $.get( "https://hpb.health.gov.lk/api/get-current-statistical", function( data ) {
-        console.log(data);
         let updated = data["data"]["update_date_time"]
         updated =updated.replace(" ", "<br>")
         //set the home page values
@@ -265,7 +263,6 @@ function initMap() {
   //function to create a marker
   function createMarker(data, infowindow, place, hospData){
     place = place.replace(/\+/g," ")
-  console.log(hospData)
     var marker = new google.maps.Marker({
         map: map,
         position: data["results"][0]["geometry"]["location"],
