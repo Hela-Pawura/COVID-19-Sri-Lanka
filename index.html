@@ -68,6 +68,7 @@
       </div>
       <div class="number-grid" id="new-deaths">00</div>
     </div>
+
     <div>
       <div class="category-grid">TOTAL GLOBAL CASES</div>
       <div class="number-grid" id="global-total">00</div>
@@ -76,6 +77,9 @@
       <div class="category-grid">LAST UPDATED</div>
       <div class="number-grid" id="last-updated"></div>
     </div>
+    <br />
+    <br /><br />
+    <canvas id="myChart" width="400" height="400"></canvas>
 
     <p
       style="width:100%; max-width:500px; color:#919191;text-align: center; margin:auto; margin-top:60px;"
@@ -114,7 +118,7 @@
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"
     ></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
     <script src="js/main.js"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_1pLrdnWTqffEjdCLOYOzLmXT3csejUI&libraries=places&callback=initMap"

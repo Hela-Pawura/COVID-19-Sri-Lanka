@@ -1,85 +1,90 @@
-body{
+body {
   background-color: black;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 #map {
-    
-    height:440px;
-    max-width:600px;
-    margin:auto;
+  height: 440px;
+  max-width: 600px;
+  margin: auto;
+}
+ul {
+  margin: 0;
+}
+.place-head {
+  margin: 0;
+}
 
-  }
-  ul{
-    margin:0;
-  }
-  .place-head{
-    margin:0;
-  }
+.covid-heading {
+  font-size: 2em;
+  margin-top: 30px;
+  text-align: center;
+  color: #f00;
+  font-weight: 700;
+}
+.covid-subhead {
+  margin-bottom: 30px;
+  text-align: center;
+  color: #fff;
+}
 
-  .covid-heading{
-    font-size: 2em;
-    margin-top: 30px;
-    text-align: center;
-    color:#f00;
-    font-weight: 700;
-  }
-  .covid-subhead{
-    margin-bottom: 30px;
-    text-align: center;
-    color:#fff;
-  }
+.number {
+  font-size: 5em;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  line-height: 1em;
+}
 
-  .number{
-    font-size: 5em;
-    margin:0;
-    text-align: center;
-    color:#fff;
-    line-height: 1em;
-  }
+.number-grid {
+  font-size: 2em;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  line-height: 1em;
+}
 
-  .number-grid{
-    font-size: 2em;
-    margin:0;
-    text-align: center;
-    color:#fff;
-    line-height: 1em;
-  }
-  
-  .category{
-    margin-top: 20px;
-    text-align: center;
-    color:#f00;
-  }
-  .category-grid{
-    margin-top:30px; 
-    font-size: 13px;
-    text-align: center;
-    color:#919191;
-  }
+.category {
+  margin-top: 20px;
+  text-align: center;
+  color: #f00;
+}
+.category-grid {
+  margin-top: 30px;
+  font-size: 13px;
+  text-align: center;
+  color: #919191;
+}
 
-  .other-stats{
-    text-align: center;
-    color:#fff;
-    font-size: 18px;
-  }
- 
-  hr{
-    border: 1px solid red;
-  }
-  .hrfooter{
-    width: 80%;
-    border: 3px solid #919191;
-  }
-  .footer {
-    position: relative;
-    left: 0px;
-    bottom: 0px;
-    height: auto;
-    width: 100%;
-    background: #000000;
-    text-align: center;
-    color: #8a8a8a;
-  }
-  a{
-    color:#f00;
-  }
+.other-stats {
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+hr {
+  border: 1px solid red;
+}
+.hrfooter {
+  width: 80%;
+  border: 3px solid #919191;
+}
+.footer {
+  position: relative;
+  left: 0px;
+  bottom: 0px;
+  height: auto;
+  width: 100%;
+  background: #000000;
+  text-align: center;
+  color: #8a8a8a;
+}
+a {
+  color: #f00;
+}
+
+#myChart {
+  width: 100%;
+  max-width: 600px;
+
+  margin: auto;
+}

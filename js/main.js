@@ -255,9 +255,9 @@ function initMap() {
         "+,Sri+Lanka&key=AIzaSyCBxMG1dMTPzM0XmSMApl-LMPhIQgmHV7U";
 
       (function(t1, hospData) {
-        $.get(geoURL, function(data) {
+        /*$.get(geoURL, function(data) {
           createMarker(data, infoWindow, t1, hospData);
-        });
+        });*/
       })(temp1, e);
     });
   });
@@ -321,3 +321,86 @@ function createMarker(data, infowindow, place, hospData) {
     infowindow.open(map, marker);
   });
 }
+
+//e=generatess a timeseries graoh using a public dataset
+function drawChart(processedData) {
+  var timeFormat = "YYYY-MM-DD";
+  //canvas
+  var ctx = document.getElementById("myChart").getContext("2d");
+  //gradient
+  var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
+  gradientFill.addColorStop(0, "rgba(196, 0, 0, 1)");
+  gradientFill.addColorStop(0.1, "rgba(90, 0, 0, 1)");
+  gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.6)");
+
+  var config = {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: "Confirmed Cases",
+          data: processedData,
+          fill: true,
+          backgroundColor: gradientFill,
+          borderColor: "#ff0000",
+          pointBorderColor: "#ff0000",
+          pointBackgroundColor: "#ff0000",
+          pointHoverBackgroundColor: "#ff0000",
+          pointHoverBorderColor: "#ff0000",
+          pointHoverRadius: 2,
+          pointHoverBorderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      title: {
+        display: false
+      },
+      scales: {
+        xAxes: [
+          {
+            type: "time",
+            time: {
+              format: timeFormat,
+              tooltipFormat: "ll"
+            },
+            scaleLabel: {
+              display: true,
+              labelString: "Date"
+            }
+          }
+        ],
+        yAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "value"
+            }
+          }
+        ]
+      }
+    }
+  };
+
+  window.myLine = new Chart(ctx, config);
+} //end function
+
+window.onload = function() {
+  var proData = [];
+  var secondPatientDate = Date.parse("2020-03-07");
+
+  $.getJSON("https://pomber.github.io/covid19/timeseries.json", function(data) {
+    data["Sri Lanka"].forEach(day => {
+      //temporary variable
+      d2 = Date.parse(day["date"]);
+      if (d2 > secondPatientDate) {
+        proData.push({
+          x: day["date"],
+          y: day["confirmed"]
+        });
+      }
+    });
+    drawChart(proData);
+  });
+};
