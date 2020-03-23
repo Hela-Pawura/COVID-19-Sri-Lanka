@@ -255,9 +255,9 @@ function initMap() {
         "+,Sri+Lanka&key=AIzaSyCBxMG1dMTPzM0XmSMApl-LMPhIQgmHV7U";
 
       (function(t1, hospData) {
-        /*$.get(geoURL, function(data) {
+        $.get(geoURL, function(data) {
           createMarker(data, infoWindow, t1, hospData);
-        });*/
+        });
       })(temp1, e);
     });
   });
