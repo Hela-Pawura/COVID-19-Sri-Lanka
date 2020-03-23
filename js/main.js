@@ -353,6 +353,9 @@ function drawChart(processedData) {
       ]
     },
     options: {
+      legend: {
+        position: "bottom"
+      },
       responsive: true,
       title: {
         display: false
