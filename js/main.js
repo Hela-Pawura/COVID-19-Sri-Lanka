@@ -226,7 +226,6 @@ function initMap() {
       }
     ]
   });
-  var geocoder = new google.maps.Geocoder();
 
   $.get("https://hpb.health.gov.lk/api/get-current-statistical", function(
     data
@@ -274,7 +273,6 @@ function initMap() {
 
 //function to create a marker
 function createMarker(data, infowindow, place, hospData) {
-  console.log(hospData);
   place = place.replace(/\+/g, " ");
   var icon = "";
   if (hospData["treatment_total"] == 0) {
