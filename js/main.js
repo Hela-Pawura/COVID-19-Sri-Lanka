@@ -354,6 +354,11 @@ function drawChart(processedData) {
       legend: {
         position: "bottom"
       },
+      elements: {
+        line: {
+          tension: 0
+        }
+      },
       responsive: true,
       title: {
         display: false
