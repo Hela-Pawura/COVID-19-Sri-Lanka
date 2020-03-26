@@ -236,9 +236,10 @@ function initMap() {
     $("#local-cases").html(data["data"]["local_total_cases"]);
     $("#local-recovered").html(data["data"]["local_recovered"]);
     $("#local-deaths").html(data["data"]["local_deaths"]);
+    $("#active-cases").html(data["data"]["local_active_cases"]);
     $("#in-observ").html(
       data["data"]["local_total_number_of_individuals_in_hospitals"]
-    ); // - data["data"]["local_total_cases"]
+    );
 
     $("#new-cases").html(data["data"]["local_new_cases"]);
     $("#new-deaths").html(data["data"]["local_new_deaths"]);
@@ -399,6 +400,7 @@ window.onload = function() {
   $.getJSON("https://pomber.github.io/covid19/timeseries.json", function(data) {
     data["Sri Lanka"].forEach(day => {
       //temporary variable
+      console.log(day["recovered"]);
       d2 = Date.parse(day["date"]);
       if (d2 > secondPatientDate) {
         proData.push({
