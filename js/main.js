@@ -338,7 +338,7 @@ function drawGreenChart(processedData, ctxID) {
     data: {
       datasets: [
         {
-          label: "Confirmed Cases",
+          label: "Recovered",
           data: processedData,
           fill: true,
           backgroundColor: gradientFill,
@@ -394,6 +394,7 @@ function drawGreenChart(processedData, ctxID) {
 
   window.myLine = new Chart(ctx, config);
 } //end function
+
 //generatess a timeseries graoh using a public dataset
 function drawChart(processedData, ctxID) {
   var timeFormat = "YYYY-MM-DD";
@@ -410,7 +411,7 @@ function drawChart(processedData, ctxID) {
     data: {
       datasets: [
         {
-          label: "Confirmed Cases",
+          label: "Total Cases",
           data: processedData,
           fill: true,
           backgroundColor: gradientFill,
