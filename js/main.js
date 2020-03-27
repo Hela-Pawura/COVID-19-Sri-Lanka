@@ -321,11 +321,84 @@ function createMarker(data, infowindow, place, hospData) {
   });
 }
 
-//e=generatess a timeseries graoh using a public dataset
-function drawChart(processedData) {
+//generatess a timeseries graoh using a public dataset
+function drawGreenChart(processedData, ctxID) {
   var timeFormat = "YYYY-MM-DD";
   //canvas
-  var ctx = document.getElementById("myChart").getContext("2d");
+  var ctx = document.getElementById(ctxID).getContext("2d");
+
+  //gradient
+  var gradientFill = ctx.createLinearGradient(0, 0, 0, 200);
+  gradientFill.addColorStop(0, "rgba(0, 196, 0, 1)");
+  gradientFill.addColorStop(0.1, "rgba(0, 90, 0, 1)");
+  gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.6)");
+
+  var config = {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: "Confirmed Cases",
+          data: processedData,
+          fill: true,
+          backgroundColor: gradientFill,
+          borderColor: "#00ff00",
+          pointBorderColor: "#00ff00",
+          pointBackgroundColor: "#00ff00",
+          pointHoverBackgroundColor: "#00ff00",
+          pointHoverBorderColor: "#00ff00",
+          pointHoverRadius: 2,
+          pointHoverBorderWidth: 1
+        }
+      ]
+    },
+    options: {
+      legend: {
+        position: "bottom"
+      },
+      elements: {
+        line: {
+          tension: 0
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+      title: {
+        display: false
+      },
+      scales: {
+        xAxes: [
+          {
+            type: "time",
+            time: {
+              format: timeFormat,
+              tooltipFormat: "ll"
+            },
+            scaleLabel: {
+              display: true,
+              labelString: "Date"
+            }
+          }
+        ],
+        yAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "value"
+            }
+          }
+        ]
+      }
+    }
+  };
+
+  window.myLine = new Chart(ctx, config);
+} //end function
+//generatess a timeseries graoh using a public dataset
+function drawChart(processedData, ctxID) {
+  var timeFormat = "YYYY-MM-DD";
+  //canvas
+  var ctx = document.getElementById(ctxID).getContext("2d");
   //gradient
   var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
   gradientFill.addColorStop(0, "rgba(196, 0, 0, 1)");
@@ -395,20 +468,34 @@ function drawChart(processedData) {
 
 window.onload = function() {
   var proData = [];
+  var proRecoveredData = [];
   var secondPatientDate = Date.parse("2020-03-07");
+  var previousDay = [];
 
   $.getJSON("https://pomber.github.io/covid19/timeseries.json", function(data) {
     data["Sri Lanka"].forEach(day => {
+      //to fix a glitch in the data API. Don't know what went rong
+      if (previousDay["recovered"] >= day["recovered"]) {
+        recovered = previousDay["recovered"];
+      } else {
+        recovered = day["recovered"];
+      }
+      console.log(day["confirmed"] - recovered);
       //temporary variable
-      console.log(day["recovered"]);
       d2 = Date.parse(day["date"]);
       if (d2 > secondPatientDate) {
         proData.push({
           x: day["date"],
           y: day["confirmed"]
         });
+        proRecoveredData.push({
+          x: day["date"],
+          y: recovered
+        });
       }
+      previousDay = day;
     });
-    drawChart(proData);
+    drawChart(proData, "total-cases-graph");
+    drawGreenChart(proRecoveredData, "recovered-graph");
   });
 };
