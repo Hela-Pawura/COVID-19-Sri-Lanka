@@ -1,3 +1,6 @@
+navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(function(registration) {
+  console.log('Excellent, registered with scope: ', registration.scope);
+});
 function initMap() {
   infoWindow = new google.maps.InfoWindow();
 
@@ -481,7 +484,6 @@ window.onload = function() {
       } else {
         recovered = day["recovered"];
       }
-      console.log(day["confirmed"] - recovered);
       //temporary variable
       d2 = Date.parse(day["date"]);
       if (d2 > secondPatientDate) {
