@@ -3,9 +3,9 @@
     "short_name": "Covid19 Tracker",
     "start_url": "index.html",
     "display": "standalone",
-    "background_color": "#2A3443",
+    "background_color": "#000000",
     "description": "Covid 19 tracker",
-    "theme_color": "#2A3443",
+    "theme_color": "#000000",
     "icons":[
         {
             "src":"./img/icon.png",
