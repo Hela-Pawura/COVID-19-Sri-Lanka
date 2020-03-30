@@ -1,6 +1,6 @@
 {
     "name": "Covid-19 Tracker",
-    "short_name": "covid19",
+    "short_name": "Covid19 Tracker",
     "start_url": "index.html",
     "display": "standalone",
     "background_color": "#2A3443",
