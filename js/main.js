@@ -283,7 +283,7 @@ function createMarker(data, infowindow, place, hospData) {
   place = place.replace(/\+/g, " ");
   var icon = "";
   if (hospData["treatment_total"] == 0) {
-    icon = "./img/cross-emp ty.png";
+    icon = "./img/cross-empty.png";
   } else {
     icon = "./img/cross.png";
   }
