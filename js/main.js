@@ -1,9 +1,9 @@
 navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(function(registration) {
   console.log('Excellent, registered with scope: ', registration.scope);
 });
-initMap()
+
 function initMap() {
- /* infoWindow = new google.maps.InfoWindow();
+ infoWindow = new google.maps.InfoWindow();
 
   
   map = new google.maps.Map(document.getElementById("map"), {
@@ -231,7 +231,7 @@ function initMap() {
       }
     ]
   });
-  */
+  
 
   $.get("https://hpb.health.gov.lk/api/get-current-statistical", function(
     data
@@ -255,27 +255,27 @@ function initMap() {
     data["data"]["hospital_data"].forEach(e => {
     temp1 = e["hospital"]["name"].replace(/ /g, "+");
 
-     /* var geoURL =
+    var geoURL =
         "https://maps.googleapis.com/maps/api/geocode/json?address=" +
         temp1 +
-        "+,Sri+Lanka&key=";*/
+        "+,Sri+Lanka&key=AIzaSyD37fj9GOQ1biuqqQVQx-0YUUY168rdfCA";
 
-      /*(function(t1, hospData) {
+      (function(t1, hospData) {
         $.get(geoURL, function(data) {
           createMarker(data, infoWindow, t1, hospData);
         });
-      })(temp1, e);*/
+      })(temp1, e);
     });
   });
 
   //center to Sri Lanka if the center is moved
- /*map.addListener("center_changed", function() {
+ map.addListener("center_changed", function() {
     if (map.zoom < 7.25) {
       window.setTimeout(function() {
         map.panTo({ lat: 7.8774, lng: 80.7003 });
       }, 1000);
     }
-  });*/
+  });
 }
 
 //function to create a marker
