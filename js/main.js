@@ -481,7 +481,6 @@ function drawChart(processedData, ctxID) {
 window.onload = function() {
   var proData = [];
   var proRecoveredData = [];
-  var secondPatientDate = Date.parse("2020-03-07");
   var previousDay = [];
 
   $.getJSON("https://pomber.github.io/covid19/timeseries.json", function(data) {
@@ -493,20 +492,19 @@ window.onload = function() {
         recovered = day["recovered"];
       }
       //temporary variable
-      d2 = Date.parse(day["date"]);
-      if (d2 > secondPatientDate) {
+      d2 = moment(day["date"]);
+      if (d2.isAfter("2020-03-07")) {
         proData.push({
-          x:moment(day["date"],'YYYY MM DD'),
+          x: moment(day["date"],'YYYY-MM-DD'),
           y: day["confirmed"]
         });
         proRecoveredData.push({
-          x: day["date"],
+          x: moment(day["date"],'YYYY-MM-DD'),
           y: recovered
         });
       }
       previousDay = day;
     });
-    console.log(proData)
     drawChart(proData, "total-cases-graph");
     drawGreenChart(proRecoveredData, "recovered-graph");
   });
