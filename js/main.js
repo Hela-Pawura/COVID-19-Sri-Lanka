@@ -454,9 +454,11 @@ function drawChart(processedData, ctxID) {
           {
             type: "time",
             time: {
-              format: timeFormat,
-              tooltipFormat: "ll"
-            },
+              displayFormats: {
+                  day: 'MMM D'
+              },
+              tooltipFormat:'ll'
+          },
             scaleLabel: {
               display: true,
               labelString: "Date"
@@ -482,9 +484,13 @@ window.onload = function() {
   var proData = [];
   var proRecoveredData = [];
   var previousDay = [];
-
-  $.getJSON("https://pomber.github.io/covid19/timeseries.json", function(data) {
-    data["Sri Lanka"].forEach(day => {
+  $("#debug").append("day<br>")
+  fetch("https://pomber.github.io/covid19/timeseries.json")
+  .then(response => response.json())
+  .then(data => {
+    data["Argentina"].forEach(day =>
+      {
+        $("#debug").append(day["date"]) //TEMP
       //to fix a glitch in the data API. Don't know what went rong
       if (previousDay["recovered"] >= day["recovered"]) {
         recovered = previousDay["recovered"];
@@ -492,7 +498,7 @@ window.onload = function() {
         recovered = day["recovered"];
       }
       //temporary variable
-      d2 = moment(day["date"]);
+      d2 = moment(day["date"],'YYYY-MM-DD');
       if (d2.isAfter("2020-03-07")) {
         proData.push({
           x: moment(day["date"],'YYYY-MM-DD'),
@@ -504,8 +510,43 @@ window.onload = function() {
         });
       }
       previousDay = day;
-    });
+    }
+    
+    );//end foreach
     drawChart(proData, "total-cases-graph");
     drawGreenChart(proRecoveredData, "recovered-graph");
+
+  }).catch(e=>{
+    $("#debug").append(day["date"])
   });
+/*
+  $.getJSON("https://pomber.github.io/covid19/jtimeseries.json",function(data) {
+    
+    data["Sri Lanka"].forEach(day => {
+      $("#debug").append(day["date"]) //TEMP
+      //to fix a glitch in the data API. Don't know what went rong
+      if (previousDay["recovered"] >= day["recovered"]) {
+        recovered = previousDay["recovered"];
+      } else {
+        recovered = day["recovered"];
+      }
+      //temporary variable
+      d2 = moment(day["date"],'YYYY-MM-DD');
+      if (d2.isAfter("2020-03-07")) {
+        proData.push({
+          x: moment(day["date"],'YYYY-MM-DD'),
+          y: day["confirmed"]
+        });
+        proRecoveredData.push({
+          x: moment(day["date"],'YYYY-MM-DD'),
+          y: recovered
+        });
+      }
+      previousDay = day;
+    })
+    .error(function(jqXHR, textStatus, errorThrown) { console.log('getJSON request failed! ' + textStatus); })
+
+    drawChart(proData, "total-cases-graph");
+    drawGreenChart(proRecoveredData, "recovered-graph");
+  });*/
 };
