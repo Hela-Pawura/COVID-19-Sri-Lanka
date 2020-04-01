@@ -1,6 +1,6 @@
 "use strict";
 
-var cacheVersion = 4.6;
+var cacheVersion = 4.7;
 var currentCache = "offline" + cacheVersion;
 const offlineUrl = "oof.html";
 
