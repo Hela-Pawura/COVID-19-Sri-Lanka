@@ -496,7 +496,7 @@ window.onload = function() {
       d2 = Date.parse(day["date"]);
       if (d2 > secondPatientDate) {
         proData.push({
-          x: day["date"],
+          x:moment(day["date"],'YYYY MM DD'),
           y: day["confirmed"]
         });
         proRecoveredData.push({
@@ -506,6 +506,7 @@ window.onload = function() {
       }
       previousDay = day;
     });
+    console.log(proData)
     drawChart(proData, "total-cases-graph");
     drawGreenChart(proRecoveredData, "recovered-graph");
   });
