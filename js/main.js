@@ -477,7 +477,7 @@ window.onload = function() {
     fetch("https://pomber.github.io/covid19/timeseries.json")
         .then(response => response.json())
         .then(data => {
-            data["Argentina"].forEach(day => {
+            data["Sri Lanka"].forEach(day => {
                     $("#debug").append(day["date"]) //TEMP
                     //to fix a glitch in the data API. Don't know what went rong
                     if (previousDay["recovered"] >= day["recovered"]) {
