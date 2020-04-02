@@ -473,12 +473,10 @@ window.onload = function() {
     var proData = [];
     var proRecoveredData = [];
     var previousDay = [];
-    $("#debug").append("day<br>")
     fetch("https://pomber.github.io/covid19/timeseries.json")
         .then(response => response.json())
         .then(data => {
             data["Sri Lanka"].forEach(day => {
-                    $("#debug").append(day["date"]) //TEMP
                     //to fix a glitch in the data API. Don't know what went rong
                     if (previousDay["recovered"] >= day["recovered"]) {
                         recovered = previousDay["recovered"];
@@ -505,7 +503,7 @@ window.onload = function() {
             drawGreenChart(proRecoveredData, "recovered-graph");
 
         }).catch(e => {
-            $("#debug").append(day["date"])
+            console.log(e)
         });
 
 };
