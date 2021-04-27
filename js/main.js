@@ -40,6 +40,15 @@ function initMap() {
 
     hospitalData.sort((a, b) => b["treatment_total"] - a["treatment_total"]);
     console.log(hospitalData);
+    hospitalData.forEach((hospital) => {
+      $("#hospital-table").append(`
+        <tr>
+            <td class="hospital-name">${hospital["hospital"]["name"]}</td>
+            <td>${hospital["treatment_total"]}</td>
+            <td>${hospital["cumulative_total"]}</td>
+        </tr>
+        `);
+    });
   });
 }
 //generatess a timeseries graoh using a public dataset
@@ -104,7 +113,7 @@ async function drawGreenChart(processedData, ctxID) {
         yAxes: [
           {
             scaleLabel: {
-              display: true,
+              display: false,
               labelString: "value",
             },
           },
@@ -278,7 +287,7 @@ async function drawChart(processedData, ctxID) {
         yAxes: [
           {
             scaleLabel: {
-              display: true,
+              display: false,
               labelString: "value",
             },
           },

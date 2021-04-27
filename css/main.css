@@ -92,3 +92,24 @@ canvas {
 .smaller {
   font-size: 3em;
 }
+
+.hospital-table {
+  width: 100%;
+  max-width: 600px;
+  color: #fff;
+  margin: auto;
+}
+
+th {
+  border-bottom: 1px solid #fff;
+}
+
+td {
+  text-align: center;
+  color: #c4c4c4;
+  border-bottom: 1px solid rgb(43, 43, 43);
+}
+
+.hospital-name {
+  text-align: left;
+}
