@@ -8,7 +8,11 @@ initMap();
 function initMap() {
   $.get("https://hpb.health.gov.lk/api/get-current-statistical", function (data) {
     let updated = data["data"]["update_date_time"];
+    let pcrProcessedData = { x: [], y: [] };
+    let hospitalData = data["data"]["hospital_data"];
+
     updated = updated.replace(" ", "<br>");
+
     //set the home page values
     $("#local-cases").html(numberWithCommas(data["data"]["local_total_cases"]));
     $("#local-recovered").html(numberWithCommas(data["data"]["local_recovered"]));
@@ -25,11 +29,21 @@ function initMap() {
     //draw the doghnut chart
     drawDoughnut([data["data"]["local_active_cases"], data["data"]["local_recovered"], data["data"]["local_deaths"]]);
 
+    //process daily pcr data
+    data["data"]["daily_pcr_testing_data"].forEach((day) => {
+      pcrProcessedData["x"].push(moment(day["date"], "YYYY-MM-DD"));
+      pcrProcessedData["y"].push(parseInt(day["count"]));
+    });
+
     console.log(data);
+    drawWhiteChart(pcrProcessedData, "daily-pcr-chart");
+
+    hospitalData.sort((a, b) => b["treatment_total"] - a["treatment_total"]);
+    console.log(hospitalData);
   });
 }
 //generatess a timeseries graoh using a public dataset
-function drawGreenChart(processedData, ctxID) {
+async function drawGreenChart(processedData, ctxID) {
   var timeFormat = "YYYY-MM-DD";
   //canvas
   var ctx = document.getElementById(ctxID).getContext("2d");
@@ -103,81 +117,7 @@ function drawGreenChart(processedData, ctxID) {
 } //end function
 
 //generatess a timeseries graoh using a public dataset
-function drawWhiteChart(processedData, ctxID) {
-  var timeFormat = "YYYY-MM-DD";
-  //canvas
-  var ctx = document.getElementById(ctxID).getContext("2d");
-
-  //gradient
-  var gradientFill = ctx.createLinearGradient(0, 0, 0, 200);
-  gradientFill.addColorStop(0, "rgba(0, 196, 0, 1)");
-  gradientFill.addColorStop(0.1, "rgba(0, 90, 0, 1)");
-  gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.6)");
-
-  var config = {
-    type: "line",
-    data: {
-      datasets: [
-        {
-          label: "Recovered",
-          data: processedData,
-          fill: true,
-          backgroundColor: gradientFill,
-          borderColor: "#00ff00",
-          pointBorderColor: "#00ff00",
-          pointBackgroundColor: "#00ff00",
-          pointHoverBackgroundColor: "#00ff00",
-          pointHoverBorderColor: "#00ff00",
-          pointHoverRadius: 2,
-          pointHoverBorderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      legend: {
-        display: false,
-      },
-      elements: {
-        line: {
-          tension: 0,
-        },
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-      title: {
-        display: false,
-      },
-      scales: {
-        xAxes: [
-          {
-            type: "time",
-            time: {
-              format: timeFormat,
-              tooltipFormat: "ll",
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Date",
-            },
-          },
-        ],
-        yAxes: [
-          {
-            scaleLabel: {
-              display: true,
-              labelString: "value",
-            },
-          },
-        ],
-      },
-    },
-  };
-
-  window.myLine = new Chart(ctx, config);
-} //end function
-
-//generatess a timeseries graoh using a public dataset
-function drawBlueChart(processedData) {
+async function drawBlueChart(processedData) {
   var ctx = document.getElementById("new-cases-chart").getContext("2d");
   var myBarChart = new Chart(ctx, {
     type: "bar",
@@ -226,8 +166,58 @@ function drawBlueChart(processedData) {
   });
 } //end function
 
+// for pcr counts
+async function drawWhiteChart(processedData) {
+  var ctx = document.getElementById("daily-pcr-chart").getContext("2d");
+  var myBarChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: processedData["x"],
+      datasets: [
+        {
+          label: "Daily New Cases",
+          data: processedData["y"],
+          backgroundColor: "#fff",
+          borderWidth: 0,
+        },
+      ],
+    },
+    options: {
+      legend: {
+        display: false,
+      },
+      maintainAspectRatio: false,
+      tooltips: {
+        enabled: true,
+      },
+      responsive: true,
+      scales: {
+        xAxes: [
+          {
+            barThickness: 2,
+            maxBarThickness: 3,
+            barPercentage: 0.3,
+            type: "time",
+            time: {
+              format: "YYYY-MM-DD",
+              tooltipFormat: "ll",
+            },
+          },
+        ],
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    },
+  });
+} //end function
+
 //generatess a timeseries graoh using a public dataset
-function drawChart(processedData, ctxID) {
+async function drawChart(processedData, ctxID) {
   var timeFormat = "YYYY-MM-DD";
   //canvas
   var ctx = document.getElementById(ctxID).getContext("2d");
@@ -300,7 +290,7 @@ function drawChart(processedData, ctxID) {
   window.myLine = new Chart(ctx, config);
 } //end function
 
-function drawDoughnut(processedData) {
+async function drawDoughnut(processedData) {
   var ctx = document.getElementById("pie-chart").getContext("2d");
   data = {
     datasets: [
