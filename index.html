@@ -2,10 +2,7 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-138288185-2"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138288185-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -27,85 +24,23 @@
     <link rel="apple-touch-icon" href="./img/test.png" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;1,700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;1,700&display=swap" rel="stylesheet" />
     <!-- Icons -->
-    <link
-      rel="apple-touch-icon"
-      sizes="57x57"
-      href="img/icons/apple-icon-57x57.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="60x60"
-      href="img/icons/apple-icon-60x60.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="72x72"
-      href="img/icons/apple-icon-72x72.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="76x76"
-      href="img/icons/apple-icon-76x76.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="114x114"
-      href="img/icons/apple-icon-114x114.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="120x120"
-      href="img/icons/apple-icon-120x120.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="144x144"
-      href="img/icons/apple-icon-144x144.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="152x152"
-      href="img/icons/apple-icon-152x152.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="img/icons/apple-icon-180x180.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="img/icons/android-icon-192x192.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="img/icons/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="img/icons/favicon-96x96.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="img/icons/favicon-16x16.png"
-    />
+    <link rel="apple-touch-icon" sizes="57x57" href="img/icons/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="img/icons/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="img/icons/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="img/icons/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="img/icons/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="img/icons/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="img/icons/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="img/icons/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="img/icons/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="img/icons/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png" />
     <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta
-      name="msapplication-TileImage"
-      content="img/icons/ms-icon-144x144.png"
-    />
+    <meta name="msapplication-TileImage" content="img/icons/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
     <!-- End icon code -->
   </head>
@@ -126,7 +61,7 @@
       <div class="number" id="active-cases">...</div>
     </div>
     <div>
-      <div class="category" style="color:#0f0">RECOVERED</div>
+      <div class="category" style="color: #0f0">RECOVERED</div>
       <div class="number" id="local-recovered">..</div>
     </div>
     <div>
@@ -137,8 +72,12 @@
       <div class="category">IN OBSERVATION</div>
       <div class="number" id="in-observ">...</div>
     </div>
+    <div>
+      <div class="category">TOTAL PCR TESTS</div>
+      <div class="number smaller" id="pcr-count">...</div>
+    </div>
     <br /><br />
-    <hr style="width:80%" />
+    <hr style="width: 80%" />
     <br />
 
     <!-- Total cases graph-->
@@ -147,24 +86,29 @@
 
     <!-- Recovered graph-->
     <div class="category-grid">RECOVERED</div>
-    <div style="height: 300px; ">
-      <canvas id="recovered-graph"  width="200" height="200"></canvas>
+    <div style="height: 300px">
+      <canvas id="recovered-graph" width="200" height="200"></canvas>
     </div>
     <!-- New cases graph-->
     <div class="category-grid">DAILY NEW CASES</div>
-    <div style="height:250px">
-      <canvas id="new-cases-chart"  ></canvas>
+    <div style="height: 250px">
+      <canvas id="new-cases-chart"></canvas>
     </div>
-    
-    <br><Br>
+    <!-- Daily PCR tests -->
+    <div class="category-grid">DAILY PCR TESTS</div>
+    <div style="height: 250px">
+      <canvas id="daily-prc-chart"></canvas>
+    </div>
+
+    <br /><br />
 
     <!-- Pie Chart -->
-    <div style="max-width:300px; margin:auto;">
+    <div style="max-width: 300px; margin: auto">
       <canvas id="pie-chart" width="100" height="100"></canvas>
     </div>
 
     <br />
-    <hr style="width:80%" />
+    <hr style="width: 80%" />
     <div class="other-stats">OTHER STATS</div>
 
     <div>
@@ -191,55 +135,42 @@
       <div class="number-grid" id="last-updated"></div>
     </div>
     <br />
-    <div class="category-grid">GLOBAL TRACKER</div><br>
-    <iframe style="width: 100%; max-width: 600px; height: 400px; margin:auto; display:block;" frameborder="0" scrolling="no" title="2019-nCoV" src="//arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c&extent=77.3846,11.535,163.5174,52.8632&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=dark&center=80.7718,7.8731&level=2"></iframe>
+    <div class="category-grid">GLOBAL TRACKER</div>
+    <br />
+    <iframe
+      style="width: 100%; max-width: 600px; height: 400px; margin: auto; display: block"
+      frameborder="0"
+      scrolling="no"
+      title="2019-nCoV"
+      src="//arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c&extent=77.3846,11.535,163.5174,52.8632&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=dark&center=80.7718,7.8731&level=2"
+    ></iframe>
     <div class="category-grid"><a href="https://coronavirus.jhu.edu/" target="_blank">Johns Hopkins Center for Systems Science and Engineering</a></div>
 
-    <p
-      style="width:100%; max-width:500px; color:#919191;text-align: center; margin:auto; margin-top:60px;"
-    >
+    <p style="width: 100%; max-width: 500px; color: #919191; text-align: center; margin: auto; margin-top: 60px">
       This site's data is based on Health Promotion Bureau's
-      <a href="https://hpb.health.gov.lk/en/api-documentation" target="_blank"
-        >Coronavirus API</a
-      >
+      <a href="https://hpb.health.gov.lk/en/api-documentation" target="_blank">Coronavirus API</a>
       and the time series plot is based on
-      <a href="https://github.com/pomber/covid19" target="_blank"
-        >Pomber's COVID-19 Data</a
-      >.
+      <a href="https://github.com/pomber/covid19" target="_blank">Pomber's COVID-19 Data</a>.
     </p>
     <br /><br />
 
-    <div class="footer" style="padding-top:20px; padding-bottom:10px">
+    <div class="footer" style="padding-top: 20px; padding-bottom: 10px">
       <hr class="hrfooter" />
       <p>
         v5.3
-        <br>Made with ♥ by
-        <a href="https://github.com/Hela-Pawura/" target="_blank"
-          >Team Helapauwra</a
-        >
+        <br />Made with ♥ by
+        <a href="https://github.com/Hela-Pawura/" target="_blank">Team Helapauwra</a>
       </p>
-      <a
-        href="https://github.com/Hela-Pawura/COVID-19-Sri-Lanka"
-        target="_blank"
-        >Source Code</a
-      >
+      <a href="https://github.com/Hela-Pawura/COVID-19-Sri-Lanka" target="_blank">Source Code</a>
       &nbsp;
-      <a
-        href="https://github.com/Hela-Pawura/COVID-19-Sri-Lanka/graphs/contributors"
-        target="_blank"
-        >Contributors
-      </a>
+      <a href="https://github.com/Hela-Pawura/COVID-19-Sri-Lanka/graphs/contributors" target="_blank">Contributors </a>
       <br />
     </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    
+
     <script src="js/main.js"></script>
     <!--
      <script

@@ -88,3 +88,7 @@ canvas {
 
   margin: auto;
 }
+
+.smaller {
+  font-size: 3em;
+}
